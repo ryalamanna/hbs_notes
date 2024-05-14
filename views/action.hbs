@@ -1,0 +1,106 @@
+<div class=" p-5">
+    <h2 class="text-center text-decoration-underline">{{heading}}</h2>
+
+    <form class="mt-5" action="" data-bs-theme="dark" novalidate >
+        <div class="mb-3">
+            <input value="{{data.title}}" type="text" class="form-control" id="titleInput" placeholder="Title">
+        </div>
+        <div class="mb-3">
+            <input value="{{data.image}}" type="text" class="form-control" id="imageInput" placeholder="Image URL">
+        </div>
+        <div id="editor" contenteditable="true">
+            {{{data.content}}}
+        </div>
+        <div class="row gap-2 mx-1 pb-4" id="editor_controlls" style="position:sticky;bottom:0;">
+            <button class="col-1 btn btn-primary fw-bold" type="button" onclick="formatText('bold')">Bold</button>
+            <button class="col-1 btn btn-primary fst-italic" type="button" onclick="formatText('italic')">Italic</button>
+            <button class="col-1 btn btn-primary text-decoration-underline" type="button" onclick="formatText('underline')">Underline</button>
+            {{!-- <button class="col-1 btn btn-primary" type="button" onclick="changeFontSize()">Font Size</button> --}}
+            <div class="col-2 p-0">
+                <select class="form-select m-0" id="fontSizeSelector" onchange="changeFontSize(this.value)">
+                    <option value="1">Small</option>
+                    <option value="2">Normal</option>
+                    <option value="3">Large</option>
+                    <option value="4">X-Large</option>
+                </select>
+            </div>
+        </div>
+
+        {{!-- youtube  --}}
+        <div class="mt-5 row">
+            <label class="mb-1 h5">Youtube</label>
+            <div class="col-11">
+                <input type="email" class="form-control" id="youtubeAddInput" placeholder="Youtube Short Link">
+            </div>
+            <button type="button" class="btn btn-primary col-1" onclick="handleAddYoutubeVideo()">+</button>
+        </div>
+
+        <div class="row mt-5" id="ytViewContainer">
+            {{#if data}}
+                {{#each data.youtubeLinks}}
+                    <div class='col-3'>
+                        <button type='button' onclick='deleteYtVideo("{{this}}")'>X</button>
+                        <iframe
+                            height='180' src='https://www.youtube.com/embed/{{this}}' 
+                            title='YouTube video player' frameborder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;'
+                            allowfullscreen
+                        >
+                        </iframe>
+                    </div>
+                {{/each}}
+            {{/if}}
+        </div>        
+
+
+        {{!-- references  --}}
+        <div class="mt-5 row">
+            <label class="mb-1 h5">Reference</label>
+            <div class="col-11">
+                <input type="email" class="form-control" id="referenceAddInput" placeholder="Reference Link">
+            </div>
+            <button type="button" class="btn btn-primary col-1" onclick="handleAddReference()">+</button>
+        </div>
+
+        <div class="row mt-3" id="referenceViewContainer">
+            {{#if data}}
+                <ul>
+                    {{#each data.references}}
+                        <li class='position-relative mt-1'>
+                            <div class='border border-1 p-2 mx-1 '>
+                                <a href='{{this}}' target="_blank">{{this}}</a>
+                            </div>
+                            <button
+                                class='position-absolute top-0 end-0 m-2 py-1 btn btn-danger' 
+                                type='button'
+                                onclick='deleteRef("{{this}}")'
+                                >
+                                -
+                            </button>
+                        </li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+        </div>
+
+
+        {{!-- submit button  --}}
+        {{#unless view}}
+            {{#unless edit}}
+                <button class="btn btn-warning" type="button" onclick="handleAddNote()">Submit</button>
+            {{/unless}}
+            {{#if edit}}
+                <button class="btn btn-warning" type="button" onclick="handleEditNote()">Update</button>
+            {{/if}}
+        {{/unless}}
+        <a class="btn btn-danger" href="/" type="button">Cancel</a>
+    </form>
+</div>
+
+<script>
+    var temporaryYtVar = "{{data.youtubeLinks}}";
+    var tempRefVar = "{{data.references}}";
+
+    var id = "{{data.id}}"
+    var title = "{{data.title}}"
+</script>

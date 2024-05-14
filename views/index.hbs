@@ -1,0 +1,42 @@
+<div class="p-5">
+    <div class="col-12 d-flex mt-3">
+        <a href='/add' class="ms-auto btn btn-primary col-1 ">Add</a>
+    </div>
+    <table class="table table-striped table-dark mt-5">
+        <thead>
+            <tr>
+            <th width="10%" scope="col">S No.</th>
+            <th width="50%" scope="col">Title</th>
+            <th width="10%" scope="col">Logo</th>
+            <th width="10%" scope="col">Date</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <th scope="row">{{incrementIndex @index}}</th>
+                <td>{{this.title}}</td>
+                <td>{{#if this.image}}<img src="{{this.image}}" alt="Logo" style="width: 35px;">{{/if}}</td>
+                <td>{{formatDate this.createdAt}}</td>
+                <td>
+                    <a 
+                        href="/edit/{{this.id}}"
+                        class='btn btn-success'>Edit
+                    </a>
+                    <a  
+                        href="/view/{{this.id}}"
+                        class='btn btn-warning mx-1'>View
+                    </a>
+                    <button
+                        class='btn btn-danger'
+                        onclick='handleDeleteData("{{this.id}}" , "{{this.title}}")'
+                    >Delete
+                    </button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>

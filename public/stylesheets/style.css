@@ -1,0 +1,236 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+:root{
+  --bs-body-bg : #212529 !important  ;
+  --bs-body-color: #dee2e6 !important;
+}
+
+*{
+  font-family: Kalam;
+}
+
+
+/* ==== action page ==== */
+
+#editor {
+  border: 1px solid #757575;
+  padding: 10px;
+  margin: 10px;
+  min-height: 600px;
+  margin: 0;
+  border-radius: 5px;
+  outline: 0;
+}
+
+#editor_controlls{
+  margin-top: 20px;
+}
+
+
+/* toast /snack bar  */
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+#snackbar.success{
+  background-color: #499b48;
+}
+
+#snackbar.fail{
+  background-color: #e83b3b;
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  /* -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s; */
+  /* animation: fadein 0.5s, fadeout 0.5s 2.5s; */
+  animation: fadein 0.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
+/* loader  */
+
+
+#loaderContainer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content:center;
+  align-items:center;
+  background:#21212188;
+  backdrop-filter: blur(5px);
+  }
+  #loaderContainer.show{
+    display: flex;
+  }
+  .loader {
+    position: relative;
+    font-size: 16px;
+    width: 5.5em;
+    height: 5.5em;
+  }
+  
+  .loader:before {
+    content: '';
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(45deg);
+    height: 100%;
+    width: 4px;
+    background: #fff;
+    left: 50%;
+    top: 50%;
+  }
+  
+  .loader:after {
+    content: '';
+    position: absolute;
+    left: 0.2em;
+    bottom: 0.18em;
+    width: 1em;
+    height: 1em;
+    background-color: orange;
+    border-radius: 15%;
+    animation: rollingRock 2.5s cubic-bezier(.79, 0, .47, .97) infinite;
+  }
+  
+  @keyframes rollingRock {
+    0% {
+      transform: translate(0, -1em) rotate(-45deg)
+    }
+  
+    5% {
+      transform: translate(0, -1em) rotate(-50deg)
+    }
+  
+    20% {
+      transform: translate(1em, -2em) rotate(47deg)
+    }
+  
+    25% {
+      transform: translate(1em, -2em) rotate(45deg)
+    }
+  
+    30% {
+      transform: translate(1em, -2em) rotate(40deg)
+    }
+  
+    45% {
+      transform: translate(2em, -3em) rotate(137deg)
+    }
+  
+    50% {
+      transform: translate(2em, -3em) rotate(135deg)
+    }
+  
+    55% {
+      transform: translate(2em, -3em) rotate(130deg)
+    }
+  
+    70% {
+      transform: translate(3em, -4em) rotate(217deg)
+    }
+  
+    75% {
+      transform: translate(3em, -4em) rotate(220deg)
+    }
+  
+    100% {
+      transform: translate(0, -1em) rotate(-225deg)
+    }
+  }
+        
+
+  /* lamp image  */
+  #lampImg1 {
+    position: fixed;
+    top: -40px;
+    right: 80px;
+    width: 70px;
+    filter: drop-shadow(5px 20px 25px #ffe600e9);
+    animation: swing1 5s infinite alternate;
+    transform-origin: top center;
+}
+
+@keyframes swing1 {
+    0% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg); /* Adjust the swing angle as needed */
+    }
+    100%{
+      transform: rotate(-5deg);
+    }
+}
+
+  #lampImg2{
+    position: fixed;
+    top: -20px;
+    right: 30px;
+    width: 80px;
+    filter: drop-shadow(5px 20px 25px #e5b90bb0);
+    animation: swing2 7s infinite alternate;
+    transform-origin: top center;
+  }
+
+  @keyframes swing2 {
+    0% {
+        transform: rotate(-5deg);
+    }
+    40% {
+        transform: rotate(6deg); /* Adjust the swing angle as needed */
+    }
+    70% {
+        transform: rotate(0deg); /* Adjust the swing angle as needed */
+    }
+    100%{
+      transform: rotate(-5deg);
+    }
+   
+}
