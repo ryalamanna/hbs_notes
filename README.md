@@ -68,3 +68,8 @@ Start the server
   npm run dev
 ```
 
+
+## Tech Stack
+
+Node, Express, Handlebars, Mongodb
+
