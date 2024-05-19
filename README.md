@@ -28,6 +28,11 @@ This app is designed to be a simple yet powerful tool to organize your learning 
 
 
 
+## Tech Stack
+
+Node, Express, Handlebars, Mongodb
+
+
 ## Screenshots
 
 ![App Screenshot](https://ryal-s3bucket-1.s3.amazonaws.com/projectScreenshots/hbs-gif.gif)
@@ -67,9 +72,4 @@ Start the server
 ```bash
   npm run dev
 ```
-
-
-## Tech Stack
-
-Node, Express, Handlebars, Mongodb
 
