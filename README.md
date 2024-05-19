@@ -18,16 +18,6 @@ This Notes App is a personal project built using Express.js to help you keep tra
     Keep track of important websites and other reference materials by saving their URLs for quick access.
     
 This app is designed to be a simple yet powerful tool to organize your learning process and make your notes easily accessible
-
-
-
-
-
-
-
-
-
-
 ## Tech Stack
 
 Node, Express, Handlebars, Mongodb
@@ -40,6 +30,12 @@ Node, Express, Handlebars, Mongodb
 ![App Screenshot](https://ryal-s3bucket-1.s3.amazonaws.com/projectScreenshots/hbs-notes-edit-screen.png)
 
 
+## MongoDB
+
+Setup MongoDB
+
+* Create a Database
+* Create a collection with name `notes`
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
@@ -65,6 +61,12 @@ Install dependencies
 
 ```bash
   npm install
+```
+
+Seed the database
+
+```bash
+  node seed.js
 ```
 
 Start the server
