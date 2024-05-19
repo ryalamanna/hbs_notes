@@ -5,7 +5,7 @@ let dbInstance = undefined;
 
 const connectDB = async () => {
     try {
-        const connectionInstance = await mongoose.connect('mongodb+srv://ryalamanna:n9X8QqojvsgBGCWu@cluster0.ycs2cg0.mongodb.net/my_notes');
+        const connectionInstance = await mongoose.connect(process.env.DB);
         dbInstance = connectionInstance;
         console.log(`Mongo db connected to host : ${connectionInstance.connection.host} `);
         return 'yes';

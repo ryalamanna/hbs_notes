@@ -8,6 +8,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var notesRouter = require('./routes/notes');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 var connectDB = require('./db/index')
 
 var helpers = require('./views/helpers/hbsHelpers');
