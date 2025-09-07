@@ -3,10 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var notesRouter = require('./routes/notes');
+const authRouter = require('./routes/auth');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -34,10 +36,33 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'HBSISTHEBEST',
+  resave: false,
+  saveUninitialized: false
+}));
+
+
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = !!req.session.userId;
+  next();
+});
+
+
+app.use('/auth', authRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/notes', notesRouter);
+// app.use('/notes', notesRouter);
 
+function requireLogin(req, res, next) {
+  if (!req.session.userId) {
+    return res.redirect('/auth/signin');
+  }
+  next();
+}
+
+// Protect /notes routes
+app.use('/notes', requireLogin, notesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -16,6 +16,10 @@ const noteSchema = mongoose.Schema(
         }],
         image : {
             type : String
+        },
+        userId: { // <-- Add this field
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
         }
     },
     {
@@ -24,10 +28,5 @@ const noteSchema = mongoose.Schema(
 );
 
 const Note = mongoose.model('Note' , noteSchema);
-
-
-
-
-
 
 module.exports = Note;

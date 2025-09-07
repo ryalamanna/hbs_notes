@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <h2>Sign Up</h2>
+  {{#if error}}<div class="alert alert-danger">{{error}}</div>{{/if}}
+  <form method="POST" action="/auth/signup">
+    <div class="mb-3">
+      <input type="text" name="username" class="form-control" placeholder="Username" required>
+    </div>
+    <div class="mb-3">
+      <input type="password" name="password" class="form-control" placeholder="Password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+    <a href="/auth/signin" class="btn btn-link">Sign In</a>
+  </form>
+</div>

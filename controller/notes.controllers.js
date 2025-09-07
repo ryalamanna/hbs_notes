@@ -1,12 +1,12 @@
 const Note = require("../models/notes.models");
 const asyncHandler = require("../utils/asyncHandler");
 
-const getNotes = async () => {
-    return await Note.find();
+const getNotes = async (userId) => {
+    return await Note.find({ userId });
 }
 
-const getNotesById = async (id) => {
-    return await Note.findById(id);
+const getNotesById = async (id, userId) => {
+    return await Note.findOne({ _id: id, userId });
 }
 
 const addNotes = asyncHandler (
@@ -16,7 +16,8 @@ const addNotes = asyncHandler (
             content : req.body.content,
             youtubeLinks : req.body.youtubeLinks,
             references : req.body.references,
-            image : req.body.image
+            image : req.body.image,
+            userId: req.session.userId // <-- associate note with logged-in user
         })
         await newNote.save();
         res.send({

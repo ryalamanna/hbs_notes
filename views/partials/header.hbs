@@ -1,5 +1,8 @@
 <header class="p-5 pb-0">
-    <h1><a href="/">My Notebook.</a></h1>
+    <h1 style="display:inline;"><a href="/">My Notebook.</a></h1>
+    {{#if isAuthenticated}}
+      <a href="/auth/logout" class="btn btn-danger p-1" >Logout</a>
+    {{/if}}
 </header>
 <style>
     header h1 a{
