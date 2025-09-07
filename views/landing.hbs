@@ -1,51 +1,99 @@
-<div class="container text-center" style="margin-top: 120px;">
-  <h1 class="display-4 mb-3" style="font-family: Kalam;">Welcome to My Notebook</h1>
-  <p class="lead mb-4" style="font-family: Inter;">
-    A personal digital notebook to save your thoughts, notes, YouTube links, and references.<br>
-    Built with Express, MongoDB, and Handlebars.<br>
-    <span style="color: #ffe600;">Brighten your ideas under the lamp!</span>
-  </p>
-  <div class="d-flex justify-content-center gap-3 mb-4">
-    <a href="/auth/signup" class="btn btn-warning btn-lg px-4">Sign Up</a>
-    <a href="/auth/signin" class="btn btn-outline-light btn-lg px-4">Sign In</a>
+<div class="container text-center" style="margin-top: 80px; position: relative; z-index: 1;">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <h1 class="display-3 mb-4" style="font-family: Kalam; font-weight: 700; background: linear-gradient(135deg, #ffe600 0%, #ffd700 50%, #ffed4e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 30px rgba(255, 230, 0, 0.3);">
+        <i class="bi bi-journal-bookmark me-3"></i>
+        Welcome to My Notebook
+      </h1>
+      <p class="lead mb-5" style="font-family: Inter; font-weight: 300; font-size: 1.3rem; line-height: 1.6; color: #cbd5e1;">
+        A personal digital notebook to save your thoughts, notes, YouTube links, and references.<br>
+        <strong>Capture ideas</strong> • <strong>Save references</strong> • <strong>Embed videos</strong> • <strong>Share knowledge</strong><br>
+        Built with Express, MongoDB, and Handlebars.<br>
+        <span style="color: #ffe600; font-weight: 500; text-shadow: 0 0 10px rgba(255, 230, 0, 0.5);">✨ Brighten your ideas under the lamp! ✨</span>
+      </p>
+      
+      <div class="d-flex justify-content-center gap-4 mb-5 flex-wrap">
+        <a href="/auth/signup" class="btn btn-primary btn-lg px-5 py-3" style="border-radius: 50px; font-size: 1.1rem; box-shadow: 0 8px 25px rgba(255, 230, 0, 0.3); transition: all 0.3s ease;">
+          <i class="bi bi-rocket-takeoff me-2"></i>Sign Up
+        </a>
+        <a href="/auth/signin" class="btn btn-outline-light btn-lg px-5 py-3" style="border-radius: 50px; font-size: 1.1rem; transition: all 0.3s ease;">
+          <i class="bi bi-door-open me-2"></i>Sign In
+        </a>
+      </div>
+    </div>
   </div>
-  <div class="row justify-content-center mt-5"></div>
-  <div class="row justify-content-center mt-5"></div>
+
   <div class="row justify-content-center mt-5">
-    <div class="col-md-8">
-      <div class="card bg-dark text-light shadow-lg border-0" style="border-radius: 1.5rem;">
-        <div class="card-body">
-          <h3 class="mb-4" style="color: #ffe600; font-family: Kalam;">
-            <i class="bi bi-stars"></i> Features
+    <div class="col-xl-10">
+      <div class="card text-light shadow-lg border-0" style="border-radius: 2rem; background: rgba(30, 41, 59, 0.8) !important; border: 1px solid rgba(255, 230, 0, 0.2) !important; backdrop-filter: blur(10px); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3) !important; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div class="card-body p-5">
+          <h3 class="mb-5" style="color: #ffe600; font-family: Kalam; font-weight: 700; font-size: 2rem; text-shadow: 0 0 15px rgba(255, 230, 0, 0.3);">
+            <i class="bi bi-stars me-3"></i>Powerful Features
           </h3>
-          <div class="row text-start">
-            <div class="col-12 col-md-6 mb-3">
-              <span class="badge bg-warning text-dark me-2" style="font-size:1.2em;">📝</span>
-              <b>Rich Note Editor:</b> Write and format notes with bold, italic, underline, and font size options.
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="d-flex align-items-start p-3 mb-3 rounded" style="transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 230, 0, 0.1)'; this.style.transform='translateX(10px)'" onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'">
+                <span class="badge me-3" style="font-size: 1.5em; padding: 0.5rem; border-radius: 50%; background: linear-gradient(135deg, #ffe600 0%, #ffd700 100%); color: #1a1a2e; min-width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center;">📝</span>
+                <div class="text-start">
+                  <div style="font-weight: 600; color: #ffe600; font-family: Inter;">Rich Text Editor</div>
+                  <div style="color: #e2e8f0;">Write and format notes with advanced styling options, bold, italic, underline, and font size controls.</div>
+                </div>
+              </div>
             </div>
-            <div class="col-12 col-md-6 mb-3">
-              <span class="badge bg-danger me-2" style="font-size:1.2em;">🎬</span>
-              <b>YouTube Integration:</b> Save and play YouTube video links right inside your notes.
+            <div class="col-12 col-lg-6">
+              <div class="d-flex align-items-start p-3 mb-3 rounded" style="transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 230, 0, 0.1)'; this.style.transform='translateX(10px)'" onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'">
+                <span class="badge me-3" style="font-size: 1.5em; padding: 0.5rem; border-radius: 50%; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; min-width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center;">🎬</span>
+                <div class="text-start">
+                  <div style="font-weight: 600; color: #ffe600; font-family: Inter;">YouTube Integration</div>
+                  <div style="color: #e2e8f0;">Seamlessly embed and play YouTube videos directly within your notes for rich multimedia content.</div>
+                </div>
+              </div>
             </div>
-            <div class="col-12 col-md-6 mb-3">
-              <span class="badge bg-info text-dark me-2" style="font-size:1.2em;">🔗</span>
-              <b>Reference Links:</b> Store and access important URLs for quick reference.
+            <div class="col-12 col-lg-6">
+              <div class="d-flex align-items-start p-3 mb-3 rounded" style="transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 230, 0, 0.1)'; this.style.transform='translateX(10px)'" onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'">
+                <span class="badge me-3" style="font-size: 1.5em; padding: 0.5rem; border-radius: 50%; background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); color: white; min-width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center;">🔗</span>
+                <div class="text-start">
+                  <div style="font-weight: 600; color: #ffe600; font-family: Inter;">Smart References</div>
+                  <div style="color: #e2e8f0;">Store, organize, and quick-access important URLs with automatic link previews and categorization.</div>
+                </div>
+              </div>
             </div>
-            <div class="col-12 col-md-6 mb-3">
-              <span class="badge bg-success me-2" style="font-size:1.2em;">👥</span>
-              <b>Multi-user Support:</b> Secure login and personalized notes for every user.
+            <div class="col-12 col-lg-6">
+              <div class="d-flex align-items-start p-3 mb-3 rounded" style="transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 230, 0, 0.1)'; this.style.transform='translateX(10px)'" onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'">
+                <span class="badge me-3" style="font-size: 1.5em; padding: 0.5rem; border-radius: 50%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; min-width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center;">👥</span>
+                <div class="text-start">
+                  <div style="font-weight: 600; color: #ffe600; font-family: Inter;">Secure Multi-User</div>
+                  <div style="color: #e2e8f0;">Advanced authentication system with personalized workspaces and privacy controls for every user.</div>
+                </div>
+              </div>
             </div>
-            <div class="col-12 col-md-6 mb-3">
-              <span class="badge bg-secondary me-2" style="font-size:1.2em;">🌙</span>
-              <b>Dark Mode Aesthetics:</b> Eye-friendly design with glowing lamp accents.
+            <div class="col-12 col-lg-6">
+              <div class="d-flex align-items-start p-3 mb-3 rounded" style="transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 230, 0, 0.1)'; this.style.transform='translateX(10px)'" onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'">
+                <span class="badge me-3" style="font-size: 1.5em; padding: 0.5rem; border-radius: 50%; background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); color: white; min-width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center;">🌙</span>
+                <div class="text-start">
+                  <div style="font-weight: 600; color: #ffe600; font-family: Inter;">Dark Mode Design</div>
+                  <div style="color: #e2e8f0;">Eye-friendly dark interface with customizable themes and ambient lighting effects for comfortable use.</div>
+                </div>
+              </div>
             </div>
-            <div class="col-12 col-md-6 mb-3">
-              <span class="badge bg-primary me-2" style="font-size:1.2em;">⚡</span>
-              <b>Fast & Responsive:</b> Built with Node.js, Express, and Handlebars for a smooth experience.
+            <div class="col-12 col-lg-6">
+              <div class="d-flex align-items-start p-3 mb-3 rounded" style="transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 230, 0, 0.1)'; this.style.transform='translateX(10px)'" onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'">
+                <span class="badge me-3" style="font-size: 1.5em; padding: 0.5rem; border-radius: 50%; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; min-width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center;">⚡</span>
+                <div class="text-start">
+                  <div style="font-weight: 600; color: #ffe600; font-family: Inter;">Lightning Fast</div>
+                  <div style="color: #e2e8f0;">Built with modern Node.js, Express, and MongoDB for blazing-fast performance and real-time sync.</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="mt-5 mb-4">
+    <p class="text-muted">
+      <i class="bi bi-shield-check me-2"></i>Secure • Private • Always Available
+    </p>
   </div>
 </div>

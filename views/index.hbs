@@ -1,42 +1,142 @@
-<div class="p-5">
-    <div class="col-12 d-flex mt-3">
-        <a href='/add' class="ms-auto btn btn-primary col-1 ">Add</a>
-    </div>
-    <table class="table table-striped table-dark mt-5">
-        <thead>
-            <tr>
-            <th width="10%" scope="col">S No.</th>
-            <th width="50%" scope="col">Title</th>
-            <th width="10%" scope="col">Logo</th>
-            <th width="10%" scope="col">Date</th>
-            <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each data}}
-            <tr>
-                <th scope="row">{{incrementIndex @index}}</th>
-                <td>{{this.title}}</td>
-                <td>{{#if this.image}}<img src="{{this.image}}" alt="Logo" style="width: 35px;">{{/if}}</td>
-                <td>{{formatDate this.createdAt}}</td>
-                <td>
-                    <a 
-                        href="/edit/{{this.id}}"
-                        class='btn btn-success'>Edit
-                    </a>
-                    <a  
-                        href="/view/{{this.id}}"
-                        class='btn btn-warning mx-1'>View
-                    </a>
-                    <button
-                        class='btn btn-danger'
-                        onclick='handleDeleteData("{{this.id}}" , "{{this.title}}")'
-                    >Delete
-                    </button>
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+<div class="p-5" style="position: relative; z-index: 1;">
+    <div class="container">
+        <!-- Header Section -->
+        <div class="row align-items-center mb-4">
+            <div class="col">
+                <h1 class="mb-0" style="font-family: Kalam; color: #ffe600; font-weight: 700; font-size: 2.5rem; text-shadow: 0 0 15px rgba(255, 230, 0, 0.3);">
+                    <i class="bi bi-journal-text me-3"></i>My Notes
+                </h1>
+                <p class="text-muted mb-0" style="font-family: Inter; margin-top: 0.5rem;">Organize your thoughts and ideas</p>
+            </div>
+            <div class="col-auto">
+                <a href='/add' class="btn btn-primary px-4 py-2" style="border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 230, 0, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 230, 0, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 230, 0, 0.3)'">
+                    <i class="bi bi-plus-circle me-2"></i>Add New Note
+                </a>
+            </div>
+        </div>
 
+        <!-- Enhanced Table -->
+        <div class="card border-0" style="background: rgba(30, 41, 59, 0.8); border-radius: 1rem; backdrop-filter: blur(10px); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-dark mb-0" style="background: transparent;">
+                        <thead>
+                            <tr style="background: rgba(255, 230, 0, 0.1);">
+                                <th width="8%" scope="col" style="border-color: rgba(255, 230, 0, 0.3); color: #ffe600; font-weight: 600; font-family: Inter; padding: 1rem;">
+                                    <i class="bi bi-hash me-1"></i>S No.
+                                </th>
+                                <th width="45%" scope="col" style="border-color: rgba(255, 230, 0, 0.3); color: #ffe600; font-weight: 600; font-family: Inter; padding: 1rem;">
+                                    <i class="bi bi-card-text me-1"></i>Title
+                                </th>
+                                <th width="8%" scope="col" style="border-color: rgba(255, 230, 0, 0.3); color: #ffe600; font-weight: 600; font-family: Inter; padding: 1rem;">
+                                    <i class="bi bi-image me-1"></i>Logo
+                                </th>
+                                <th width="15%" scope="col" style="border-color: rgba(255, 230, 0, 0.3); color: #ffe600; font-weight: 600; font-family: Inter; padding: 1rem;">
+                                    <i class="bi bi-calendar-event me-1"></i>Date
+                                </th>
+                                <th scope="col" style="border-color: rgba(255, 230, 0, 0.3); color: #ffe600; font-weight: 600; font-family: Inter; padding: 1rem;">
+                                    <i class="bi bi-gear me-1"></i>Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each data}}
+                            <tr style="border-color: rgba(255, 230, 0, 0.2); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 230, 0, 0.05)'" onmouseout="this.style.background='transparent'">
+                                <th scope="row" style="padding: 1rem; color: #cbd5e1; font-family: Inter; font-weight: 500;">
+                                    {{incrementIndex @index}}
+                                </th>
+                                <td style="padding: 1rem; color: #e2e8f0; font-family: Inter;">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-file-text me-2 text-warning"></i>
+                                        <span style="font-weight: 500;">{{this.title}}</span>
+                                    </div>
+                                </td>
+                                <td style="padding: 1rem;">
+                                    {{#if this.image}}
+                                        <div class="d-flex justify-content-center">
+                                            <img src="{{this.image}}" alt="Logo" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid rgba(255, 230, 0, 0.3); object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                                        </div>
+                                    {{else}}
+                                        <div class="d-flex justify-content-center">
+                                            <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 230, 0, 0.1); border: 2px solid rgba(255, 230, 0, 0.3); display: flex; align-items: center; justify-content: center;">
+                                                <i class="bi bi-image text-warning"></i>
+                                            </div>
+                                        </div>
+                                    {{/if}}
+                                </td>
+                                <td style="padding: 1rem; color: #94a3b8; font-family: Inter; font-size: 0.9rem;">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    {{formatDate this.createdAt}}
+                                </td>
+                                <td style="padding: 1rem;">
+                                    <div class="d-flex gap-2 flex-wrap">
+                                        <a 
+                                            href="/edit/{{this.id}}"
+                                            class="btn btn-success btn-sm px-3"
+                                            style="border-radius: 0.5rem; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease;"
+                                            onmouseover="this.style.transform='translateY(-1px)'"
+                                            onmouseout="this.style.transform='translateY(0)'"
+                                        >
+                                            <i class="bi bi-pencil-square me-1"></i>Edit
+                                        </a>
+                                        <a  
+                                            href="/view/{{this.id}}"
+                                            class="btn btn-warning btn-sm px-3"
+                                            style="border-radius: 0.5rem; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease;"
+                                            onmouseover="this.style.transform='translateY(-1px)'"
+                                            onmouseout="this.style.transform='translateY(0)'"
+                                        >
+                                            <i class="bi bi-eye me-1"></i>View
+                                        </a>
+                                        <button
+                                            class="btn btn-danger btn-sm px-3"
+                                            style="border-radius: 0.5rem; font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease;"
+                                            onmouseover="this.style.transform='translateY(-1px)'"
+                                            onmouseout="this.style.transform='translateY(0)'"
+                                            onclick='handleDeleteData("{{this.id}}" , "{{this.title}}")'
+                                        >
+                                            <i class="bi bi-trash3 me-1"></i>Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                            {{#unless data}}
+                            <tr>
+                                <td colspan="5" class="text-center py-5" style="color: #94a3b8; font-family: Inter;">
+                                    <div>
+                                        <i class="bi bi-journal-x" style="font-size: 3rem; color: rgba(255, 230, 0, 0.3); margin-bottom: 1rem;"></i>
+                                        <h4 style="color: #ffe600; font-family: Kalam;">No Notes Found</h4>
+                                        <p class="mb-3">Start your journey by creating your first note!</p>
+                                        <a href="/add" class="btn btn-primary">
+                                            <i class="bi bi-plus-circle me-2"></i>Create First Note
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/unless}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Footer -->
+        {{#if data}}
+        <div class="row mt-4">
+            <div class="col text-center">
+                <div class="d-inline-flex align-items-center gap-4 px-4 py-2" style="background: rgba(255, 230, 0, 0.1); border-radius: 50px; border: 1px solid rgba(255, 230, 0, 0.2);">
+                    <span style="color: #ffe600; font-family: Inter; font-weight: 500;">
+                        <i class="bi bi-collection me-1"></i>
+                        Total Notes: <strong>{{data.length}}</strong>
+                    </span>
+                    <span style="color: #94a3b8; font-size: 0.9rem; font-family: Inter;">
+                        <i class="bi bi-lightbulb me-1"></i>
+                        Keep organizing your thoughts!
+                    </span>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
 </div>

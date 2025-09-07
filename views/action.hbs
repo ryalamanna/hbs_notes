@@ -1,106 +1,232 @@
-<div class=" p-5">
-    <h2 class="text-center text-decoration-underline">{{heading}}</h2>
+<div class="p-4" style="position: relative; z-index: 1;">
+    <div class="container">
+        <!-- Header Section -->
+        <div class="text-center mb-5">
+            <h2 style="font-family: Kalam; color: #ffe600; font-weight: 700; font-size: 2.5rem; text-shadow: 0 0 15px rgba(255, 230, 0, 0.3); text-decoration: underline; text-decoration-color: rgba(255, 230, 0, 0.5); text-underline-offset: 0.5rem;">
+                {{#if view}}
+                <i class="bi bi-eye me-3"></i>{{heading}}
+                {{else if edit}}
+                <i class="bi bi-pencil-square me-3"></i>{{heading}}
+                {{else}}
+                <i class="bi bi-plus-circle me-3"></i>{{heading}}
+                {{/if}}
+            </h2>
+            <p style="color: #94a3b8; font-family: Inter; font-size: 1rem; margin-top: 1rem;">
+                {{#if view}}
+                Reading mode - View your saved content
+                {{else if edit}}
+                Edit mode - Update your existing note
+                {{else}}
+                Create mode - Add a new note to your collection
+                {{/if}}
+            </p>
+        </div>
 
-    <form class="mt-5" action="" data-bs-theme="dark" novalidate >
-        <div class="mb-3">
-            <input value="{{data.title}}" type="text" class="form-control" id="titleInput" placeholder="Title">
-        </div>
-        <div class="mb-3">
-            <input value="{{data.image}}" type="text" class="form-control" id="imageInput" placeholder="Image URL">
-        </div>
-        <div id="editor" contenteditable="true">
-            {{{data.content}}}
-        </div>
-        <div class="row gap-2 mx-1 pb-4" id="editor_controlls" style="position:sticky;bottom:0;">
-            <button class="col-1 btn btn-primary fw-bold" type="button" onclick="formatText('bold')">Bold</button>
-            <button class="col-1 btn btn-primary fst-italic" type="button" onclick="formatText('italic')">Italic</button>
-            <button class="col-1 btn btn-primary text-decoration-underline" type="button" onclick="formatText('underline')">Underline</button>
-            {{!-- <button class="col-1 btn btn-primary" type="button" onclick="changeFontSize()">Font Size</button> --}}
-            <div class="col-2 p-0">
-                <select class="form-select m-0" id="fontSizeSelector" onchange="changeFontSize(this.value)">
-                    <option value="1">Small</option>
-                    <option value="2">Normal</option>
-                    <option value="3">Large</option>
-                    <option value="4">X-Large</option>
-                </select>
+        <form class="mt-4" action="" data-bs-theme="dark" novalidate>
+            <!-- Title and Image Section -->
+            <div class="row mb-4">
+                <div class="col-lg-8 mb-3">
+                    <label class="form-label" style="color: #ffe600; font-family: Inter; font-weight: 600; margin-bottom: 0.5rem;">
+                        <i class="bi bi-card-heading me-2"></i>Note Title
+                    </label>
+                    <input value="{{data.title}}" type="text" class="form-control form-control-lg" id="titleInput" placeholder="Enter a descriptive title for your note..." {{#if view}}readonly{{/if}} style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 230, 0, 0.3); color: #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem;">
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <label class="form-label" style="color: #ffe600; font-family: Inter; font-weight: 600; margin-bottom: 0.5rem;">
+                        <i class="bi bi-image me-2"></i>Cover Image URL
+                    </label>
+                    <input value="{{data.image}}" type="text" class="form-control form-control-lg" id="imageInput" placeholder="https://example.com/image.jpg" {{#if view}}readonly{{/if}} style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 230, 0, 0.3); color: #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem;">
+                </div>
             </div>
-        </div>
 
-        {{!-- youtube  --}}
-        <div class="mt-5 row">
-            <label class="mb-1 h5">Youtube</label>
-            <div class="col-11">
-                <input type="email" class="form-control" id="youtubeAddInput" placeholder="Youtube Short Link">
-            </div>
-            <button type="button" class="btn btn-primary col-1" onclick="handleAddYoutubeVideo()">+</button>
-        </div>
-
-        <div class="row mt-5" id="ytViewContainer">
-            {{#if data}}
-                {{#each data.youtubeLinks}}
-                    <div class='col-3'>
-                        <button type='button' onclick='deleteYtVideo("{{this}}")'>X</button>
-                        <iframe
-                            height='180' src='https://www.youtube.com/embed/{{this}}' 
-                            title='YouTube video player' frameborder='0'
-                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;'
-                            allowfullscreen
-                        >
-                        </iframe>
+            <!-- Content Editor Section -->
+            <div class="mb-4">
+                <label class="form-label" style="color: #ffe600; font-family: Inter; font-weight: 600; margin-bottom: 0.5rem;">
+                    <i class="bi bi-textarea-t me-2"></i>Note Content
+                </label>
+                <div id="editor" contenteditable="{{#unless view}}true{{else}}false{{/unless}}" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 230, 0, 0.3); border-radius: 0.75rem; padding: 1.5rem; min-height: 300px; color: #e2e8f0; font-family: Inter; font-size: 1rem; line-height: 1.6; {{#if view}}cursor: default;{{/if}}">
+                    {{{data.content}}}
+                </div>
+                
+                <!-- Editor Controls -->
+                {{#unless view}}
+                <div class="row gap-2 mx-1 mt-3 p-3" id="editor_controlls" style="position: sticky; bottom: 20px; background: rgba(30, 41, 59, 0.95); border-radius: 1rem; backdrop-filter: blur(10px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);">
+                    <div class="col-auto">
+                        <button class="btn btn-primary fw-bold" type="button" onclick="formatText('bold')" style="border-radius: 0.5rem;">
+                            <i class="bi bi-type-bold me-1"></i>Bold
+                        </button>
                     </div>
-                {{/each}}
-            {{/if}}
-        </div>        
-
-
-        {{!-- references  --}}
-        <div class="mt-5 row">
-            <label class="mb-1 h5">Reference</label>
-            <div class="col-11">
-                <input type="email" class="form-control" id="referenceAddInput" placeholder="Reference Link">
+                    <div class="col-auto">
+                        <button class="btn btn-primary fst-italic" type="button" onclick="formatText('italic')" style="border-radius: 0.5rem;">
+                            <i class="bi bi-type-italic me-1"></i>Italic
+                        </button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-primary text-decoration-underline" type="button" onclick="formatText('underline')" style="border-radius: 0.5rem;">
+                            <i class="bi bi-type-underline me-1"></i>Underline
+                        </button>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-select" id="fontSizeSelector" onchange="changeFontSize(this.value)" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 230, 0, 0.3); color: #e2e8f0; border-radius: 0.5rem; width: auto;">
+                            <option value="1">Small</option>
+                            <option value="2" selected>Normal</option>
+                            <option value="3">Large</option>
+                            <option value="4">X-Large</option>
+                        </select>
+                    </div>
+                </div>
+                {{/unless}}
             </div>
-            <button type="button" class="btn btn-primary col-1" onclick="handleAddReference()">+</button>
-        </div>
 
-        <div class="row mt-3" id="referenceViewContainer">
-            {{#if data}}
-                <ul>
-                    {{#each data.references}}
-                        <li class='position-relative mt-1'>
-                            <div class='border border-1 p-2 mx-1 '>
-                                <a href='{{this}}' target="_blank">{{this}}</a>
-                            </div>
-                            <button
-                                class='position-absolute top-0 end-0 m-2 py-1 btn btn-danger' 
-                                type='button'
-                                onclick='deleteRef("{{this}}")'
-                                >
-                                -
+            <!-- YouTube Section -->
+            <div class="card mb-4" style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 230, 0, 0.2); border-radius: 1rem;">
+                <div class="card-header" style="background: rgba(255, 230, 0, 0.1); border-bottom: 1px solid rgba(255, 230, 0, 0.2); border-radius: 1rem 1rem 0 0;">
+                    <h5 class="mb-0" style="color: #ffe600; font-family: Kalam; font-weight: 600;">
+                        <i class="bi bi-youtube me-2"></i>YouTube Videos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {{#unless view}}
+                    <div class="row mb-4">
+                        <div class="col">
+                            <input type="text" class="form-control" id="youtubeAddInput" placeholder="Paste YouTube short link (e.g., https://youtu.be/dQw4w9WgXcQ)" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 230, 0, 0.3); color: #e2e8f0; border-radius: 0.5rem;">
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="handleAddYoutubeVideo()" style="border-radius: 0.5rem;">
+                                <i class="bi bi-plus-circle me-1"></i>Add Video
                             </button>
-                        </li>
-                    {{/each}}
-                </ul>
-            {{/if}}
+                        </div>
+                    </div>
+                    {{/unless}}
+
+                    <div class="row" id="ytViewContainer">
+                        {{#if data}}
+                            {{#each data.youtubeLinks}}
+                            <div class='col-lg-4 col-md-6 mb-4'>
+                                <div style="position: relative; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);">
+                                    {{#unless ../view}}
+                                    <button type='button' onclick='deleteYtVideo("{{this}}")' class="btn btn-danger btn-sm" style="position: absolute; top: 10px; right: 10px; z-index: 10; border-radius: 50%; width: 35px; height: 35px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                        <i class="bi bi-x"></i>
+                                    </button>
+                                    {{/unless}}
+                                    <iframe
+                                        width="100%" height='200' src='https://www.youtube.com/embed/{{this}}' 
+                                        title='YouTube video player' frameborder='0'
+                                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;'
+                                        allowfullscreen style="border-radius: 0.75rem;">
+                                    </iframe>
+                                </div>
+                            </div>
+                            {{/each}}
+                        {{else}}
+                        <div class="col-12 text-center py-4">
+                            <div style="opacity: 0.6;">
+                                <i class="bi bi-youtube" style="font-size: 3rem; color: #6b7280; margin-bottom: 1rem;"></i>
+                                <p style="color: #9ca3af; font-family: Inter;">No YouTube videos added yet</p>
+                                {{#unless view}}
+                                <small style="color: #6b7280;">Add your first video above</small>
+                                {{/unless}}
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- References Section -->
+            <div class="card mb-4" style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 230, 0, 0.2); border-radius: 1rem;">
+                <div class="card-header" style="background: rgba(255, 230, 0, 0.1); border-bottom: 1px solid rgba(255, 230, 0, 0.2); border-radius: 1rem 1rem 0 0;">
+                    <h5 class="mb-0" style="color: #ffe600; font-family: Kalam; font-weight: 600;">
+                        <i class="bi bi-link-45deg me-2"></i>Reference Links
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {{#unless view}}
+                    <div class="row mb-4">
+                        <div class="col">
+                            <input type="text" class="form-control" id="referenceAddInput" placeholder="Paste reference URL (e.g., https://example.com/article)" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 230, 0, 0.3); color: #e2e8f0; border-radius: 0.5rem;">
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-primary" onclick="handleAddReference()" style="border-radius: 0.5rem;">
+                                <i class="bi bi-plus-circle me-1"></i>Add Link
+                            </button>
+                        </div>
+                    </div>
+                    {{/unless}}
+
+                    <div id="referenceViewContainer">
+                        {{#if data}}
+                        <div class="row">
+                            {{#each data.references}}
+                            <div class="col-12 mb-3">
+                                <div class='position-relative p-3 rounded' style="background: rgba(255, 230, 0, 0.05); border: 1px solid rgba(255, 230, 0, 0.2); border-radius: 0.75rem; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 230, 0, 0.1)'" onmouseout="this.style.background='rgba(255, 230, 0, 0.05)'">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-link-45deg me-3" style="color: #ffe600; font-size: 1.2rem;"></i>
+                                        <a href='{{this}}' target="_blank" style="color: #e2e8f0; text-decoration: none; font-family: Inter; flex: 1; word-break: break-all;" onmouseover="this.style.color='#ffe600'" onmouseout="this.style.color='#e2e8f0'">
+                                            {{this}}
+                                        </a>
+                                        {{#unless ../view}}
+                                        <button class='btn btn-danger btn-sm ms-3' type='button' onclick='deleteRef("{{this}}")' style="border-radius: 50%; width: 35px; height: 35px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        {{/unless}}
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                        {{else}}
+                        <div class="text-center py-4">
+                            <div style="opacity: 0.6;">
+                                <i class="bi bi-link" style="font-size: 3rem; color: #6b7280; margin-bottom: 1rem;"></i>
+                                <p style="color: #9ca3af; font-family: Inter;">No reference links added yet</p>
+                                {{#unless view}}
+                                <small style="color: #6b7280;">Add your first reference above</small>
+                                {{/unless}}
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex gap-3 justify-content-center flex-wrap mt-5">
+                {{#unless view}}
+                    {{#unless edit}}
+                    <button class="btn btn-warning px-5 py-3" type="button" onclick="handleAddNote()" style="border-radius: 50px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(255, 230, 0, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <i class="bi bi-check-circle me-2"></i>Create Note
+                    </button>
+                    {{/unless}}
+                    {{#if edit}}
+                    <button class="btn btn-warning px-5 py-3" type="button" onclick="handleEditNote()" style="border-radius: 50px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(255, 230, 0, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <i class="bi bi-arrow-repeat me-2"></i>Update Note
+                    </button>
+                    {{/if}}
+                {{/unless}}
+                
+                <a class="btn btn-danger px-5 py-3" href="/list" type="button" style="border-radius: 50px; font-size: 1.1rem; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="bi bi-arrow-left me-2"></i>
+                    {{#if view}}Back to Notes{{else}}Cancel{{/if}}
+                </a>
+            </div>
+        </form>
+
+        {{#if view}}
+        <div class="text-center mt-4">
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="/edit/{{data.id}}" class="btn btn-success px-4 py-2" style="border-radius: 50px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i class="bi bi-pencil-square me-2"></i>Edit This Note
+                </a>
+            </div>
         </div>
-
-
-        {{!-- submit button  --}}
-        {{#unless view}}
-            {{#unless edit}}
-                <button class="btn btn-warning" type="button" onclick="handleAddNote()">Submit</button>
-            {{/unless}}
-            {{#if edit}}
-                <button class="btn btn-warning" type="button" onclick="handleEditNote()">Update</button>
-            {{/if}}
-        {{/unless}}
-        <a class="btn btn-danger" href="/" type="button">Cancel</a>
-    </form>
+        {{/if}}
+    </div>
 </div>
 
 <script>
     var temporaryYtVar = "{{data.youtubeLinks}}";
     var tempRefVar = "{{data.references}}";
-
     var id = "{{data.id}}"
     var title = "{{data.title}}"
 </script>

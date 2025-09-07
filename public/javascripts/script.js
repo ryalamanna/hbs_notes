@@ -106,7 +106,7 @@ function handlePostData (url, data) {
       console.log(responseData.message);
       showSnacbar('Added Successfully !' , true);
       setTimeout(() => {
-        window.location.href = "/";
+        window.location.href = "/list";
       }, 1000);
   })
   .catch(error => {
